@@ -1,0 +1,18 @@
+FROM node:14
+
+WORKDIR /app
+
+# Copy package files from the context (parent directory)
+COPY SGBS-Frontend/package.json SGBS-Frontend/yarn.lock ./
+
+# Install dependencies (including node-sass binary rebuild)
+RUN yarn install
+
+# Copy application source
+COPY SGBS-Frontend/ .
+
+# Expose port
+EXPOSE 3000
+
+# Start command
+CMD ["yarn", "run", "start:backend"]
